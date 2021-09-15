@@ -73,10 +73,15 @@ int main()
 {
 	// Declarations
 	// a point called 'origin', initialized to 0, 0
+	CartesianPoint origin = CartesianPoint(0,0);
 	// a point called 'destination'
+	CartesianPoint destination = CartesianPoint(0, 0);
+
+
 	int inputX; // temporary input variable for x
 	int inputY; // temporary input variable for y
 	// to store the distance between two points
+	double distance;
 
 	try
 	{
@@ -86,22 +91,26 @@ int main()
 		cout << "\nEnter coordinates of the destination point: " << endl;
 		// prompt for, read, and store x coordinate:
 		cout << "X: ";
-
+		inputX = ConsoleInput::ReadInteger();
+		destination.SetX(inputX);
 
 
 		// prompt for, read, and store y coordinate:
 		cout << "Y: ";
-
+		inputY = ConsoleInput::ReadInteger();
+		destination.SetY(inputY);
 
 
 		// Processing
 		// determine the distance between the two points
-
+		distance = origin.GetDistanceTo(destination);
 
 		// Output 
 		// Show the points and the distance
 		cout << fixed << setprecision(3); // formatting
-
+		cout << "\nThe distance between " << origin.ToString()
+			 << " and " << destination.ToString() << " is "
+			<< distance << ", " << endl;
 
 	}
 
@@ -120,12 +129,12 @@ int main()
 // CartesianPoint constructor
 CartesianPoint::CartesianPoint(int x, int y)
 {
-	// Sets the points
+	// Sets the points x and y
 	SetPoint(x,y);
 }
 
 //-----------------------------------------------------------------------
-// Set Points
+// Takes 2 ints and sets the points x and y using SetX() and SetY()
 void CartesianPoint::SetPoint(int x, int y)
 {
 	// Set x
@@ -133,13 +142,13 @@ void CartesianPoint::SetPoint(int x, int y)
 	// Set y
 	SetY(y);
 }
-
+// Takes int and sets the points x to that value
 void CartesianPoint::SetX(int x)
 {
 	// Sets Points X to passed value
 	myX = x;
 }
-
+// Takes a int and sets the points y to that value
 void CartesianPoint::SetY(int y)
 {
 	// Sets points Y to passed value
@@ -148,12 +157,14 @@ void CartesianPoint::SetY(int y)
 
 
 //-----------------------------------------------------------------------
+// Returns points X value
 int CartesianPoint::GetX()
 {
 	// returns the points x
 	return myX;
 }
 
+// Returns points Y value
 int CartesianPoint::GetY()
 {
 	// returns the points y
