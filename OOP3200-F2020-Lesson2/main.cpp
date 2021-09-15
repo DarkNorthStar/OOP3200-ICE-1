@@ -17,38 +17,49 @@
 
 using namespace std;
 
-// class declaration section
+//Class declaration section
 class CartesianPoint
 {
 public:
-
+	//-----------------------------------------------------------------------
 	/* Constructor: Used to initialize objects
 	*	- always the same name as the class
 	*	- never have a return type
 	*	- called automatically when an obj is instantiated
 	*	- should set values for each member variable
 	*/
-	CartesianPoint();
+	CartesianPoint(int x = 1, int y = 1);
 
-
+	//-----------------------------------------------------------------------
 	/* Accessors: Used to query the state of the object
 	*	- never modifies the object
 	*	- should specify const at the end of the prototype/header
 	*/
 
 	// get x
-	// get y 
-	// get the distance between this point and a second point
-	// convert the obj to a string	
-
+	int GetX();
+	// get y
+	int GetY();
+	
+	//-----------------------------------------------------------------------
 	/* Mutator(s): Used to change the state of the object
 	*	- should contain logic to ensure object remains in a valid state.
 	*	- typically sets a member variable to a parameter
 	*/
 
 	// set x
-	// set y, 
-	// set point (both x and y)	
+	void SetX(int x);
+	// set y,
+	void SetY(int y);
+	// set point (both x and y)
+	void SetPoint(int x, int y);
+
+	//-----------------------------------------------------------------------
+	// get the distance between this point and a second point
+	double GetDistanceTo(CartesianPoint pointTo) const;
+	// convert the obj to a string
+	string ToString() const;
+	
 
 private:
 	// private data members for the dimensions of the point
@@ -106,26 +117,79 @@ int main()
 
 // Class definition section
 
+// CartesianPoint constructor
+CartesianPoint::CartesianPoint(int x, int y)
+{
+	// Sets the points
+	SetPoint(x,y);
+}
+
+//-----------------------------------------------------------------------
+// Set Points
+void CartesianPoint::SetPoint(int x, int y)
+{
+	// Set x
+	SetX(x);
+	// Set y
+	SetY(y);
+}
+
+void CartesianPoint::SetX(int x)
+{
+	// Sets Points X to passed value
+	myX = x;
+}
+
+void CartesianPoint::SetY(int y)
+{
+	// Sets points Y to passed value
+	myY = y;
+}
+
+
+//-----------------------------------------------------------------------
+int CartesianPoint::GetX()
+{
+	// returns the points x
+	return myX;
+}
+
+int CartesianPoint::GetY()
+{
+	// returns the points y
+	return myY;
+}
+
+//-----------------------------------------------------------------------
 /** GetDistanceTo Method for CartesianPoint class
 *	Determines the distance between this point and a second point.
 *	@param	pointTo: CartesianPoint
 *	@return	the distance as a double
 */
-
-//{
-//	// difference between x values
-//	// difference between y values
-//	// return the formula (based on Pythagorean theorem)
-//
-//}
+double CartesianPoint::GetDistanceTo(CartesianPoint pointTo) const
+{
+	//	difference between x values
+	int xDelta = pointTo.myX - myX;
+	//	difference between y values
+	int yDelta = pointTo.myY - myY;
+	//	return the formula (based on Pythagorean theorem)
+	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
+}
 
 /** ToString Method for CartesianPoint class
 *	Converts the obj to a string.
 *	@return	the obj state as a string
 */
+string CartesianPoint::ToString() const
+{
+	// declare a stringstream object
+	stringstream strOut;
+	// build the string
+	strOut << "(" << myX << ", " << myY << ")";
+	// return the string
+	return strOut.str();
+}
 
-//{
-//	// declare a stringstream object
-//	// build the string
-//	// return the string
-//}
+
+
+
